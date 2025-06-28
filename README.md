@@ -1,4 +1,4 @@
-# aspnet core 8 mvc bootstrap5 quickstart template
+# ASP.Net Core 8 MVC bootstrap5 Quickstart Template
 
 A clean, responsive ASP.NET Core 8 MVC starter template using Bootstrap 5 written using visual studio 2022 — ideal for rapid prototyping or production-ready web apps.
 
