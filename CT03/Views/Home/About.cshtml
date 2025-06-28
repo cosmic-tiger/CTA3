@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+<main id="aboutMain" data-view-init="setupAboutView" class="container py-4">
+    <h2>About</h2>
+    <p>This project is a lightweight MVC starter app with view-scoped JavaScript, Bootstrap 5 styling, and no client-side frameworks. Built by Cosmic-tiger — painfully assisted with copilot.</p>
+    <p>
+        <div>
+        When I say view-scoped javascript ...
+        </div>
+        <div>
+        Each view like Index, Counter, FetchData, and About in your app is paired with a specific JS function and for specific ids:
+        </div>
+        <div>
+        setupIndexView(), indexMain
+        </div>
+        <div>
+        setupCounterView(), counterMain
+        </div>
+        <div>
+        setupFetchDataView(), fetchDataMain
+        </div>
+        <div>
+        setupAboutView(), aboutMain
+        </div>
+        <div>
+        These javascript functions are defined globally, but they only run when the view contains specific markers eg a specific ids above, and a specific attribute.
+        </div>
+
+        <div>This is NOT an SinglePageApplication - it is a standard mvc, although, when getting data from service  (mock or live), the data is dynamically updated after doing a fetch().</div>
+        <div>The next version one will be an SPA</div>
+    </p>
+</main>

@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - bootstrap 5 aspetnetcore 8 mvc quick start template</title>
+
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+            <!-- Sidebar -->
+            <nav class="col-12 col-md-3 col-lg-2 d-md-block bg-gradient bg-primary text-white p-3">
+                <div class="fs-4 fw-bold mb-4">⭐🐯 Cosmic-tiger</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white fw-semibold" asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-house-fill me-2"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white fw-semibold" asp-controller="Home" asp-action="Counter">
+                            <i class="bi bi-plus-circle-fill me-2"></i> Counter
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white fw-semibold" asp-controller="Home" asp-action="FetchData">
+                            <i class="bi bi-cloud-sun-fill me-2"></i> Fetch Data
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col px-0 d-flex flex-column">
+                <!-- Top bar -->
+                <header class="bg-light border-bottom px-4 py-2 d-flex justify-content-end">
+                    <a asp-controller="Home" asp-action="About" class="nav-link text-dark">About</a>
+                </header>
+
+                <!-- View body -->
+                <div class="flex-grow-1 px-4 py-3">
+                    @RenderBody()
+                </div>
+
+                <!-- Footer -->
+                <footer class="bg-light border-top text-muted py-2 px-4 mt-auto">
+                    &copy; @DateTime.Now.Year - bootstrap 5 aspetnetcore 8 mvc quick start template
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        console.log("🔧 Layout script loaded");
+
+        window.setupIndexView = function () {
+            console.log("✅ setupIndexView ran");
+            const container = document.getElementById("indexMain");
+            console.log("→ indexMain exists:", !!container);
+        };
+
+        window.setupCounterView = function () {
+            console.log("✅ setupCounterView ran");
+            const container = document.getElementById("counterMain");
+            console.log("→ counterMain exists:", !!container);
+            if (!container) return;
+
+            const counterValue = container.querySelector("#counterValue");
+            const incrementBtn = container.querySelector("#incrementBtn");
+            const resetBtn = container.querySelector("#resetBtn");
+
+            console.log("→ Elements found:", {
+                counterValue: !!counterValue,
+                incrementBtn: !!incrementBtn,
+                resetBtn: !!resetBtn
+            });
+
+            if (counterValue && incrementBtn && resetBtn) {
+                let count = 0;
+                incrementBtn.addEventListener("click", () => {
+                    count++;
+                    counterValue.textContent = count;
+                });
+                resetBtn.addEventListener("click", () => {
+                    count = 0;
+                    counterValue.textContent = count;
+                });
+            }
+        };
+
+
+        window.setupFetchDataView = function () {
+            console.log("📡 setupFetchDataView initialized");
+
+            const container = document.getElementById("fetchDataMain");
+            const tableBody = document.getElementById("forecastBody");
+            const sourceLabel = document.getElementById("weatherSource");
+
+            if (!container || !tableBody) {
+                console.warn("⚠️ Required DOM elements not found");
+                return;
+            }
+
+            fetch("/api/weather")
+                .then(res => res.json())
+                .then(data => {
+                  const source = data.source ?? "unknown";
+                  const forecasts = Array.isArray(data.forecasts) ? data.forecasts : [];
+
+                  // update the source label
+                  const sourceLabel = document.getElementById("weatherSource");
+                  if (sourceLabel) sourceLabel.textContent = `source: ${source}`;
+
+                  // render the forecasts
+                  const tableBody = document.getElementById("forecastBody");
+                  if (!tableBody) return;
+
+                  tableBody.innerHTML = "";
+                  forecasts.forEach(f => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                      <td>${f.date}</td>
+                      <td>${f.tempC}</td>
+                      <td>${f.tempF}</td>
+                      <td>${f.summary}</td>`;
+                    tableBody.appendChild(row);
+                  });
+                });
+                };
+
+
+
+
+        window.setupAboutView = function () {
+            console.log("✅ setupAboutView ran");
+            const container = document.getElementById("aboutMain");
+            console.log("→ aboutMain exists:", !!container);
+        };
+
+        function runViewSetup() {
+            const element = document.querySelector("[data-view-init]");
+            const fnName = element?.dataset?.viewInit;
+            const globalFunc = window[fnName];
+
+            console.log("🧩 runViewSetup triggered");
+            console.log("→ data-view-init element:", !!element);
+            console.log("→ fnName:", fnName);
+            console.log("→ typeof window[fnName]:", typeof globalFunc);
+
+            if (typeof globalFunc === "function") {
+                globalFunc();
+            } else {
+                console.debug("ℹ️ No scoped view setup to run");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", runViewSetup);
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿@inject IConfiguration Configuration
+
+@{
+    ViewData["Title"] = "Weather";
+    var useMock = Configuration.GetValue<bool>("UseMockWeather");
+    var sourceLabel = useMock
+        ? "source: mock test data"  
+        : "source: live from Meteo";
+}
+
+<h1>Weather Data (<span id="weatherSource">@sourceLabel</span>)</h1>
+
+<div id="fetchDataMain" data-view-init="setupFetchDataView">
+    <p>This component demonstrates weather forecast retrieval from your service layer, backed by either test or real data.</p>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (°C)</th>
+                <th>Temp. (°F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody id="forecastBody">
+            <tr class="text-muted fst-italic">
+                <td>1901-01-13</td>
+                <td>16</td>
+                <td>19</td>
+                <td>Fetching data from service...</td>
+            </tr>
+            <tr class="text-muted fst-italic">
+                <td>1901-01-14</td>
+                <td>17</td>
+                <td>20</td>
+                <td>Fetching data from service...</td>
+            </tr>
+            <tr class="text-muted fst-italic">
+                <td>1901-01-15</td>
+                <td>18</td>
+                <td>21</td>
+                <td>Fetching data from service...</td>
+            </tr>
+            <tr class="text-muted fst-italic">
+                <td>1901-01-16</td>
+                <td>19</td>
+                <td>22</td>
+                <td>Fetching data from service...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
