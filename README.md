@@ -19,3 +19,5 @@ For fetchdata, there are three types of data: hard coded data (shown immediately
 
 `asp.net core` `mvc` `bootstrap 5` `razor pages` `c#` `web template` `starter project` `responsive design` `html css` `dotnet`
 
+**Tags:**  
+👉 `asp.net-core` · `bootstrap-5` · `mvc-template` · `dotnet8` · `razor-pages` · `responsive-ui` · `starter-kit`
