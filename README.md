@@ -15,5 +15,7 @@ Also, for some reason, the bootrap-icons.css is in the Font folder.
 For fetchdata, there are three types of data: hard coded data (shown immediately as soon as view is loaded), mock data, and live data from the main Meteo weather api website.
 
 
+## 🔖 Tags
 
+`asp.net core` `mvc` `bootstrap 5` `razor pages` `c#` `web template` `starter project` `responsive design` `html css` `dotnet`
 
